@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artist Info</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+</head>
+
+<body>
+    <header><a href="/home"><img class="home" src="../static/h2.png"></a><div class="hd">Artists Tracker</div></header>
+    <div class="content">
+
+    {{if .Name}}
+    <p class="aName"><b></b> {{.Name}}</p>
+    {{end}}
+
+<li class="infocard">
+
+    <div class="infopage">  
+    <img class="picture" src="{{.Image}}">
+
+  
+    {{if .Members}}
+    <p><b>Members: </b><br> {{range $index, $element := .Members}}{{if $index}}, {{end}}{{.}}{{end}}</p>
+    {{end}}
+
+    {{ if ne .CreationDate 0 }}
+    <p><b>Creation date: </b><br> {{.CreationDate}}</p>
+    {{ end }}
+
+    {{if .FirstAlbum}}
+    <p><b>First album: </b><br> {{.FirstAlbum}}</p>
+    {{end}}
+
+    {{if .Str_Dates}}
+    <p><b>Tour dates: </b><br>{{.Str_Dates}}</p>
+    {{end}}
+
+    {{if .Str_Locations}}
+    <p><b>Tour locations: </b><br>{{.Str_Locations}}</p>
+    {{end}}
+
+    {{if .Str_Relations}}
+    <p><b>Concert info:</b><br>{{.Str_Relations}}</p>
+    {{end}}
+    
+    <a href="/home">
+        <button><b>RETURN</b></button> 
+        </a>
+    </div>
+</li>
+</div>
+</body>
+</html>
