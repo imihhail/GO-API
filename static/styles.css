@@ -65,6 +65,8 @@ button {
     border-radius: 5px; 
     cursor: pointer;
     transition: 0.3s;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 button:hover{
@@ -169,4 +171,5 @@ p {
     margin-bottom: 20px;
     cursor: pointer;
     float: left;
+    
 }

@@ -22,7 +22,7 @@ func Search(strc []ArtistInfo, r *http.Request) []ArtistInfo {
 		}
 
 		for _, member := range artist.Members {
-			if strings.Contains(strings.Title(member), search_input) || strings.Contains(strings.ToLower(member), search_input) {
+			if strings.Title(member) == search_input || strings.ToUpper(member) == search_input {
 				newArtists = append(newArtists, artist)
 				break
 			}

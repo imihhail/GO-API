@@ -12,7 +12,7 @@
     <form action="/home" method="GET">
         <input class="search" type="text" placeholder="Search..." name="name" list="List">
         <datalist id="List">
-          {{range .}}
+          {{range .Search_Suggestion}}
             <option value="{{.Name}} (artist/band)"></option>
             {{range .Members}}
             <option value="{{.}} (member)"></option>
@@ -24,13 +24,15 @@
             
           {{end}}
         </datalist>
+ 
         <button type="submit">Search</button>
+
       </form>
       
     
     <div class="content">
     <ul>
-        {{range .}}
+        {{range .ExportData}}
          
             <li class="card">
                 
@@ -52,6 +54,10 @@
             </li>
         {{end}}
     </ul>
+</div>
+<a href="/home">
+  <button><b>RETURN</b></button> 
+  </a>
 </div>
 </body>
 </html>

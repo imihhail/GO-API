@@ -29,6 +29,7 @@ type ArtistInfo struct {
 func Homepage(w http.ResponseWriter, r *http.Request) {
 
 	user_input := r.URL.Query().Get("name")
+	fmt.Println(user_input)
 
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
@@ -70,6 +71,7 @@ func Homepage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//Connect locations with artists
 	for i := range Artists {
 		for _, item := range Location_format.Index {
 			if item.ID == Artists[i].Id {
@@ -79,9 +81,14 @@ func Homepage(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	Export_data := Artists
-	if user_input != "" {
-		Export_data = Search(Artists, r)
+	type TemplateData struct {
+		Search_Suggestion []ArtistInfo
+		ExportData        []ArtistInfo
+	}
+
+	templateData := TemplateData{
+		Search_Suggestion: Artists,
+		ExportData:        Search(Artists, r),
 	}
 
 	custom_tmpl, err := template.ParseFiles("template/index.html")
@@ -91,7 +98,7 @@ func Homepage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = custom_tmpl.Execute(w, Export_data)
+	err = custom_tmpl.Execute(w, templateData)
 	if err != nil {
 		// Check if the error is due to the client disconnecting
 		if !strings.Contains(err.Error(), "broken pipe") {
