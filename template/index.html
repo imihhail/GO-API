@@ -8,12 +8,13 @@
 <header><a href="/home"><img class="home" src="../static/h2.png"></a><div class="hd">Artists Tracker</div></header>
 
 <body>
-  
     <form action="/home" method="GET">
         <input class="search" type="text" placeholder="Search..." name="name" list="List">
         <datalist id="List">
+          
           {{range .Search_Suggestion}}
             <option value="{{.Name}} (artist/band)"></option>
+
             {{range .Members}}
             <option value="{{.}} (member)"></option>
             {{end}}
@@ -23,15 +24,12 @@
             {{end}}
             
             <option value="{{.CreationDate}} ({{.Name}}) - Creation year"></option>
-
+            
           {{end}}
         </datalist>
- 
         <button type="submit">Search</button>
-
       </form>
-      
-    
+          
     <div class="content">
     <ul>
         {{range .ExportData}}
