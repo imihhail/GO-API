@@ -22,6 +22,8 @@
             <option value="{{.}}"></option>
             {{end}}
             
+            <option value="{{.CreationDate}} ({{.Name}}) - Creation year"></option>
+
           {{end}}
         </datalist>
  
@@ -42,15 +44,16 @@
                 <p><b>Name:</b> {{.Name}}</p>
                 </div>
                 <p><b>Members: </b> {{range $index, $element := .Members}}{{if $index}}, {{end}}{{.}}{{end}}.</p>
-                </div>              
-                <p><b>Creation Date:</b> {{.CreationDate}}</p>
-                <p><b>First Album:</b> {{.FirstAlbum}}</p>             
+                </div>
+                <div class="kla">            
+                <p><b>Creation year:</b> {{.CreationDate}}</p>
+                <p><b>First album:</b> {{.FirstAlbum}}</p>             
                 <div class="overlay">
                 <p><a href="/dates?name={{.Id}}">Tour Dates</a></p> 
                 <p><a href="/locations?name={{.Id}}">Tour Locations</a></p>
                 <p><a href="/artists?name={{.Id}}">Full information</a></p>
                 </div>
-
+                </div>  
             </li>
         {{end}}
     </ul>

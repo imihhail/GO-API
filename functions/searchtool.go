@@ -10,10 +10,11 @@ import (
 func Search(strc []ArtistInfo, r *http.Request) []ArtistInfo {
 	input := r.URL.Query().Get("name")
 
-	re := regexp.MustCompile(` \(member\)| \(artist/band\)`)
+	re := regexp.MustCompile(`\s\(.*`)
 	search_input := re.ReplaceAllString(input, "")
 
 	var newArtists []ArtistInfo
+	membercount := 0
 
 	for _, artist := range strc {
 		if strings.Contains(strings.Title(artist.Name), search_input) || strings.Contains(strings.ToLower(artist.Name), search_input) {
@@ -22,14 +23,18 @@ func Search(strc []ArtistInfo, r *http.Request) []ArtistInfo {
 		}
 
 		for _, member := range artist.Members {
-			if strings.Title(member) == search_input || strings.ToUpper(member) == search_input {
+			if strings.Contains(strings.Title(member), search_input) || strings.Contains(strings.ToLower(member), search_input) {
+				membercount++
 				newArtists = append(newArtists, artist)
 				break
 			}
 		}
 
 		for _, member := range artist.Locations_unpacked {
-			if strings.Contains(member, search_input) {
+			if strings.Contains(strings.Title(member), search_input) || strings.Contains(strings.ToLower(member), search_input) {
+				if len(search_input) < 2 && membercount > 0 {
+					break
+				}
 				newArtists = append(newArtists, artist)
 				break
 			}
@@ -44,6 +49,7 @@ func Search(strc []ArtistInfo, r *http.Request) []ArtistInfo {
 			newArtists = append(newArtists, artist)
 			continue
 		}
+
 	}
 	return newArtists
 }

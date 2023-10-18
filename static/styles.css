@@ -165,11 +165,12 @@ p {
 
 .home{
     opacity: 0.9;
-    height: 110px;
+    height: 100px;
     margin-right: -110px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     cursor: pointer;
     float: left;
     
 }
+

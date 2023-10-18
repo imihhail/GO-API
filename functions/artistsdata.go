@@ -27,10 +27,6 @@ type ArtistInfo struct {
 }
 
 func Homepage(w http.ResponseWriter, r *http.Request) {
-
-	user_input := r.URL.Query().Get("name")
-	fmt.Println(user_input)
-
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		http.Error(w, "Error fetching artist data", http.StatusInternalServerError)
